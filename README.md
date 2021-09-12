@@ -75,6 +75,8 @@ Everything was under Windows 10 without WSL, except where specified
 
 ### Server
 - `> npm init`
-- `> npm install typescript express nodemon @types/express @types/node`
+- `> npm install typescript express`
+- `> npm install --save-dev nodemon ts-node @types/express @types/node`
 - `> npx eslint --init`, same as Client but withour React and targeting Node. I think I also had some issue and needed to manually install `typescript-eslint`
 - I copied my nodemon config from [here](https://github.com/adi73434/web-tutorials-and-snippets/blob/master/nodemon.json)
+- Specify type as module in package.json

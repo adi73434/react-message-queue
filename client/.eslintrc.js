@@ -12,7 +12,7 @@ module.exports = {
 		"plugin:react/recommended",
 		"google",
 		// My settings file, used for both JS (here) and TS (down below)
-		"./.eslint-global-config.js",
+		"../.eslint-global-config.js",
 	],
 
 	"parserOptions": {
@@ -56,7 +56,7 @@ module.exports = {
 				"plugin:react/recommended",
 				"google",
 				// My settings file, used for both JS (here) and TS (down below)
-				"./.eslint-global-config.js",
+				"../.eslint-global-config.js",
 			],
 			"parser": "@typescript-eslint/parser",
 			"parserOptions": {
