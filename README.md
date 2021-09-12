@@ -69,14 +69,17 @@ Everything was under Windows 10 without WSL, except where specified
 - `> npm audit fix`
 - Convert LF -> CRLF with WSL: `> find . -type d \( -name node_modules -o -path ./.git \) -prune -false -o -type f -name '*.*' -print0 | xargs -0 unix2dos` (Reference [here](https://stackoverflow.com/a/4210072))
 - Exit WSL
-- `> npm install express`
+- `> npm install express typedoc`
+
+
+Note that for some reasons, TypeDoc was only documenting things that were *exported* from within the `index.tsx` file. So everything has to be exported pointlessly like this, even though on another project this wasn't the case.
 
 
 
 ### Server
 - `> npm init`
 - `> npm install typescript express`
-- `> npm install --save-dev nodemon ts-node @types/express @types/node`
+- `> npm install --save-dev nodemon ts-node typedoc @types/express @types/node`
 - `> npx eslint --init`, same as Client but withour React and targeting Node. I think I also had some issue and needed to manually install `typescript-eslint`
 - I copied my nodemon config from [here](https://github.com/adi73434/web-tutorials-and-snippets/blob/master/nodemon.json)
 - Specify type as module in package.json

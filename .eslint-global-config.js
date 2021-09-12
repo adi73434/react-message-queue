@@ -9,7 +9,7 @@ module.exports = {
 		"@typescript-eslint/ban-ts-comment": "warn",
 
 
-		// Turn off requirement for jsdoc
+		// Require JSDoc comments
 		"require-jsdoc": [
 			"error", {
 			"require": {
@@ -18,7 +18,7 @@ module.exports = {
 					"ClassDeclaration": true,
 					"ArrowFunctionExpression": true,
 					"FunctionExpression": true,
-			},
+				},
 			},
 		],
 	

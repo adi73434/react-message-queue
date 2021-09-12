@@ -33,5 +33,9 @@
 	},
 	"include": [
 		"src"
-	]
+	],
+	"typedocOptions": {
+		"entryPoints": ["./src/"],
+		"out": "./docs/"
+	}
 }

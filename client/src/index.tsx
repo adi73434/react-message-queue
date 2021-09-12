@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import lolek from "./lolek";
+
 
 ReactDOM.render(
 	<React.StrictMode>

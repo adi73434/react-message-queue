@@ -1,0 +1,131 @@
+<!DOCTYPE html><html class="default no-js"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>react-message-queue_server</title><meta name="description" content="Documentation for react-message-queue_server"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">react-message-queue_server</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>react-message-queue_server</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#react-message-queue" id="react-message-queue" style="color: inherit; text-decoration: none;">
+  <h1>react-message-queue</h1>
+</a>
+
+<a href="#stack" id="stack" style="color: inherit; text-decoration: none;">
+  <h2>Stack</h2>
+</a>
+<p>Client: </p>
+<ul>
+<li>ReactJS</li>
+<li>TypeScript</li>
+</ul>
+<p>Server (if I do create one):</p>
+<ul>
+<li>NodeJS</li>
+<li>Express</li>
+<li>Jest (idk if I can be bothered)</li>
+<li>TypeScript</li>
+<li>NGINX</li>
+</ul>
+
+<a href="#specification" id="specification" style="color: inherit; text-decoration: none;">
+  <h2>Specification</h2>
+</a>
+<ul>
+<li>Must use functional React, though can use as many components as I want.</li>
+</ul>
+
+<a href="#interface" id="interface" style="color: inherit; text-decoration: none;">
+  <h3>Interface</h3>
+</a>
+<ul>
+<li>Text box to enter text</li>
+<li>Button to submit message</li>
+<li>Dedicated area for notifications</li>
+</ul>
+
+<a href="#base-function" id="base-function" style="color: inherit; text-decoration: none;">
+  <h3>Base Function</h3>
+</a>
+<ul>
+<li><input disabled="" type="checkbox"> Allow user to enter message, and store it in the redux store when user submits</li>
+<li><input disabled="" type="checkbox"> A separate component should get the message and display it as a notification</li>
+<li><input disabled="" type="checkbox"> Display each notification for 5 seconds, with an individual 5 second timer for each notification and no &quot;hang&quot;</li>
+<li><input disabled="" type="checkbox"> After 5 seconds has passed, remove the message from the redux store.</li>
+</ul>
+
+<a href="#ideas" id="ideas" style="color: inherit; text-decoration: none;">
+  <h3>Ideas</h3>
+</a>
+<ul>
+<li><input disabled="" type="checkbox"> Add a character limit and update as user types, warning if the surpass</li>
+<li><input disabled="" type="checkbox"> <del>Store messages in localStorage</del> Create a backend because I&#39;m bored?</li>
+<li><input disabled="" type="checkbox"> Create a db of accounts, no password cause I&#39;m lazy.</li>
+<li><input disabled="" type="checkbox"> When a user types in an existing username, they are &quot;logged in&quot;</li>
+<li><input disabled="" type="checkbox"> When logged in, they are presented with a simple dropdown/list of users (not &quot;friends&quot;, just all existing accounts)</li>
+<li><input disabled="" type="checkbox"> User can select whom to message</li>
+<li><input disabled="" type="checkbox"> Only one message window open at once, keep messages cached (in Redux?) between changes. Do not keep messages locally between page refresh.</li>
+<li><input disabled="" type="checkbox"> No deleting or editing, for simplicity sake because I cannot be bothered with checking diff/update time. I guess something like <a href="https://react-query.tanstack.com/">React Query</a> could be useful, but I&#39;ve not used it (yet?).</li>
+</ul>
+
+<a href="#reproduction-steps" id="reproduction-steps" style="color: inherit; text-decoration: none;">
+  <h2>Reproduction steps</h2>
+</a>
+<p>Everything was under Windows 10 without WSL, except where specified</p>
+
+<a href="#client" id="client" style="color: inherit; text-decoration: none;">
+  <h3>Client</h3>
+</a>
+<ul>
+<li><code>&gt;  npx create-react-app client --template typescript</code></li>
+<li><code>&gt; cd client</code></li>
+<li><code>&gt; npx eslint --init</code></li>
+<li><ul>
+<li><code>To check syntax, find problems, and enforce code style</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>JavaScript modules (import/export)</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>React</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>Does your project use TypeScript?</code> -&gt; <code>Yes</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>Browser</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>Use a popular style guide</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>Google</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>JavaScript</code></li>
+</ul>
+</li>
+<li><ul>
+<li><code>Would you like to install them now with npm?</code> -&gt; <code>Yes</code></li>
+</ul>
+</li>
+<li>Then I overwrote the ESLint config with my own, from <a href="https://github.com/adi73434/web-tutorials-and-snippets">here</a>, and changed it a bit.</li>
+<li><code>&gt; npm install</code> (probably, I forgot)</li>
+<li><code>&gt; npm audit fix</code></li>
+<li>Convert LF -&gt; CRLF with WSL: <code>&gt; find . -type d \( -name node_modules -o -path ./.git \) -prune -false -o -type f -name &#39;*.*&#39; -print0 | xargs -0 unix2dos</code> (Reference <a href="https://stackoverflow.com/a/4210072">here</a>)</li>
+<li>Exit WSL</li>
+<li><code>&gt; npm install express typedoc</code></li>
+</ul>
+<p>Note that for some reasons, TypeDoc was only documenting things that were <em>exported</em> from within the <code>index.tsx</code> file. So everything has to be exported pointlessly like this, even though on another project this wasn&#39;t the case.</p>
+
+<a href="#server" id="server" style="color: inherit; text-decoration: none;">
+  <h3>Server</h3>
+</a>
+<ul>
+<li><code>&gt; npm init</code></li>
+<li><code>&gt; npm install typescript express</code></li>
+<li><code>&gt; npm install --save-dev nodemon ts-node typedoc @types/express @types/node</code></li>
+<li><code>&gt; npx eslint --init</code>, same as Client but withour React and targeting Node. I think I also had some issue and needed to manually install <code>typescript-eslint</code></li>
+<li>I copied my nodemon config from <a href="https://github.com/adi73434/web-tutorials-and-snippets/blob/master/nodemon.json">here</a></li>
+<li>Specify type as module in package.json</li>
+</ul>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-variable"><a href="modules.html#default" class="tsd-kind-icon">default</a></li><li class="tsd-kind-function"><a href="modules.html#asdf" class="tsd-kind-icon">asdf</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
