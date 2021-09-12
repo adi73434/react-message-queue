@@ -1,0 +1,39 @@
+{
+"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+    "jsx": "react-jsx",
+		"strict": true,
+		"allowJs": true,
+		// "checkJs": true,
+		"noEmit": true,
+		"sourceMap": true,
+		"importsNotUsedAsValues": "error",
+		// With traceResolution on, there's a lot
+		// being emitted even though skipLibCheck is
+		// set to true. With the types here, compiling
+		// seems to become faster and it seems to stop
+		// checking node_modules, but I think the implication
+		// of this is you don't get fancy types and auto-importing
+		// "types": [],
+		"traceResolution": false,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
+		"outDir": "",
+		"rootDir": "",
+	},
+  "include": [
+    "src"
+  ]
+}
