@@ -10,16 +10,6 @@ app.get("/test", (req: express.Request, res: express.Response) => {
 });
 
 
-/**
- * typedoc test
- *
- * @param {string} a
- */
-export const asdf = (a: string): void => {
-	console.log(a)
-	;
-};
-
 
 app.listen(3010, () => {
 	console.log("Example app listening on port 3010!");
