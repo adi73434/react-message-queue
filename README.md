@@ -3,6 +3,7 @@
 ## Stack
 Client: 
 - ReactJS
+- Redux
 - TypeScript
 
 
@@ -70,11 +71,14 @@ Everything was under Windows 10 without WSL, except where specified
 - `> npm audit fix`
 - Convert LF -> CRLF with WSL: `> find . -type d \( -name node_modules -o -path ./.git \) -prune -false -o -type f -name '*.*' -print0 | xargs -0 unix2dos` (Reference [here](https://stackoverflow.com/a/4210072))
 - Exit WSL
-- `> npm install express typedoc react-redux @types/react-redux`
+- `> npm install typedoc react-redux react-router-dom @types/react-redux @types/react-router-dom`
 - `> npm install @reduxjs/toolkit redux-devtools`
 
 Note that for some reasons, TypeDoc was only documenting things that were *exported* from within the `index.tsx` file. So everything has to be exported pointlessly like this, even though on another project this wasn't the case.
 
+I copied/referenced the folder structure and some of the files (`app/hooks.ts`, `app/store.ts`) from `npx create-react-app --template redux-typescript`. Reading the docs and going through the template folder feels like a haze dream now, so I don't know exactly what came from what.
+
+I also set up React's dynamic routing within the `features/app.ts` file; however, this can be extended with nested routes within other files.
 
 
 ### Server
