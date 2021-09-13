@@ -71,7 +71,7 @@ Everything was under Windows 10 without WSL, except where specified
 - `> npm audit fix`
 - Convert LF -> CRLF with WSL: `> find . -type d \( -name node_modules -o -path ./.git \) -prune -false -o -type f -name '*.*' -print0 | xargs -0 unix2dos` (Reference [here](https://stackoverflow.com/a/4210072))
 - Exit WSL
-- `> npm install typedoc react-redux react-router-dom @types/react-redux @types/react-router-dom`
+- `> npm install typedoc react-redux react-router-dom @types/react-redux @types/react-router-dom stylelint stylelint-config-idiomatic-order`
 - `> npm install @reduxjs/toolkit redux-devtools`
 
 Note that for some reasons, TypeDoc was only documenting things that were *exported* from within the `index.tsx` file. So everything has to be exported pointlessly like this, even though on another project this wasn't the case.

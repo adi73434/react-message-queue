@@ -5,10 +5,9 @@ import "./index.css";
 import App from "./features/app/App";
 import reportWebVitals from "./reportWebVitals";
 import {Provider} from "react-redux";
-// Where the Redux store is. This was the folder location from the create-react-app template,
-// and apparently it should be followed alongside the "duck" structure. I don't actually know
-// what's sane and what's inane, though.
-import {store} from "./app/store";
+// Based off of the create-react-app structure, but I renamed it because I was getting confused
+// with the other app folder, lol
+import {store} from "./init/store";
 
 ReactDOM.render(
 	<React.StrictMode>
