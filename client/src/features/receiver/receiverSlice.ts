@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 // ...lol
 import {TypesZ} from "../../../../types/index";
+import {RootState} from "../../init/store";
 
 
 export interface ReceiverState {
@@ -11,7 +12,13 @@ export interface ReceiverState {
 
 
 const initialState: ReceiverState = {
-	messages: [],
+	messages: [
+		{
+			id: 0,
+			text: "asdf",
+			sent_date: new Date().getDate(),
+		},
+	],
 };
 
 
@@ -29,3 +36,5 @@ export const receiverSlice = createSlice({
 
 
 export default receiverSlice.reducer;
+
+// export const selectMessages = (state: RootState) => state.counter.value;
