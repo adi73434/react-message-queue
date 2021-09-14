@@ -1,4 +1,6 @@
 import React, {Fragment} from "react";
+import styles from "./sender.module.css";
+
 
 /**
  *
@@ -6,7 +8,11 @@ import React, {Fragment} from "react";
  * @return {*}  {JSX.Element}
  */
 const Sender = (): JSX.Element => {
-	return <Fragment></Fragment>;
+	return (
+		<div className={styles.container}>
+			I&apos;m the sender
+		</div>
+	);
 };
 
 export default Sender;

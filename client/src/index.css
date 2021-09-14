@@ -15,5 +15,6 @@
 
 body {
 	margin: 0;
+	color: var(--col-text-white);
 	font-family: "Roboto", Arial, Helvetica, sans-serif;
 }

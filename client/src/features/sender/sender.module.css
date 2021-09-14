@@ -1,0 +1,5 @@
+.container {
+	width: calc(100vw / 3);
+	height: 100vh;
+	background-color: var(--col-bg-1);
+}

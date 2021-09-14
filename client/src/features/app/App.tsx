@@ -7,6 +7,12 @@ import {
 	Switch,
 } from "react-router-dom";
 
+import styles from "./app.module.css";
+
+import Receiver from "../receiver/Receiver";
+import Sender from "../sender/Sender";
+import SentLog from "../sentLog/SentLog";
+
 
 /**
  *
@@ -16,11 +22,13 @@ import {
 const App = (): JSX.Element => {
 	return (
 		<Router>
-			<div>
-				hello
-				<Link to="/">Home</Link>
-				<Link to="/test1">test1</Link>
-				<Link to="/test2">test2</Link>
+			<div className={styles.container}>
+				<Receiver></Receiver>
+				<Sender></Sender>
+				<SentLog></SentLog>
+				{/* <Link to="/">Home</Link> */}
+				{/* <Link to="/test1">test1</Link> */}
+				{/* <Link to="/test2">test2</Link> */}
 			</div>
 
 			{/* Render component based on first match */}

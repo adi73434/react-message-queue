@@ -24,7 +24,7 @@ routerApi.get("/message/list", (req: express.Request, res: express.Response) => 
 });
 
 routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {
-	makeDbConn().query("SELECT * FROM messages WHERE id = ?", [req.params["id"]], (err: MysqlError | null, result: TypesZ.MessageFromServer[]) => {
+	makeDbConn().query("SELECT * FROM messages WHERE id = ?", [req.params["id"]], (err: MysqlError | null, result: TypesZ.MessageFromServer) => {
 		if (err) throw err;
 		res.send(result);
 	});
