@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
+/* -------------------------------------------------------------------------- */
+/* This file contains global cSS */
+/* -------------------------------------------------------------------------- */
+
 :root {
 	--col-bg-1: rgb(20, 20, 20);
 	--col-bg-2: rgb(40, 40, 40);

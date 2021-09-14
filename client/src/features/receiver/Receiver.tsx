@@ -1,8 +1,10 @@
 import React, {Fragment} from "react";
 import styles from "./receiver.module.css";
 
+
+
 /**
- *
+ * This pings the server for new messages and renders them chronologically.
  *
  * @return {*}  {JSX.Element}
  */

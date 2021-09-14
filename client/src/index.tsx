@@ -22,3 +22,9 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// I was trying to get TypeDoc to work, still no-go
+// export {default as App} from "./features/app/App";
+// export {default as Receiver} from "./features/receiver/Receiver";
+// export {default as Sender} from "./features/sender/Sender";
+// export {default as SentLog} from "./features/sentLog/SentLog";
