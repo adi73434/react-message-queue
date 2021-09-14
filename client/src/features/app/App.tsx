@@ -6,8 +6,6 @@ import {
 	Route,
 	Switch,
 } from "react-router-dom";
-import Test1 from "../test1";
-import Test2 from "../test2";
 
 
 /**
@@ -28,10 +26,10 @@ const App = (): JSX.Element => {
 			{/* Render component based on first match */}
 			<Switch>
 				<Route path="/test1">
-					<Test1/>
+					{/* <Test1/> */}
 				</Route>
 				<Route path="/test2">
-					<Test2/>
+					{/* <Test2/> */}
 				</Route>
 			</Switch>
 		</Router>
