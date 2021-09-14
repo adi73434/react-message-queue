@@ -14,7 +14,8 @@ export namespace TypesZ {
 	export interface MessageInSenderQueue extends MessageBasic {
 		// eslint-disable-next-line
 		sent_date?: number,
-		attemptedToSend: boolean
+		attemptedToSend?: boolean,
+		cancelledByUser?: boolean,
 	}
 
 	export interface MessageInSentLog extends MessageBasic {
@@ -24,7 +25,7 @@ export namespace TypesZ {
 
 	export interface MessageFromServer extends MessageBasic {
 		// eslint-disable-next-line
-		sent_date: numberZZ,
+		sent_date: number,
 		// This would be extended with stuff like "marked_as_read", which
 		// would not be necessary for the MessageInSenderQueue or MessageInSentLog,
 		// hence why I split this

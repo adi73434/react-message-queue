@@ -17,7 +17,7 @@ const initialState: SentLogState = {
 
 
 export const sentLogSlice = createSlice({
-	name: "sender",
+	name: "sentLog",
 	initialState,
 	reducers: {
 		addMessage: (state) => {

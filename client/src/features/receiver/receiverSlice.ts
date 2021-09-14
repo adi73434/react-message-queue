@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 // ...lol
 import {TypesZ} from "../../../../types/index";
@@ -12,29 +12,33 @@ export interface ReceiverState {
 
 
 const initialState: ReceiverState = {
-	messages: [
-		{
-			id: 0,
-			text: "asdf",
-			sent_date: new Date().getDate(),
-		},
-	],
+	messages: [],
 };
 
 
 
 export const receiverSlice = createSlice({
-	name: "sender",
+	name: "receiver",
 	initialState,
 	reducers: {
-		addMessage: (state) => {
-			// This adds the message to the store
+		// This can receive either one or multiple messages to add to the store
+		addMessage: (state: ReceiverState, action: PayloadAction<TypesZ.MessageFromServer | TypesZ.MessageFromServer[]>) => {
+			state.messages = state.messages.concat(action.payload);
 		},
 	},
 });
 
+/**
+ *
+ *
+ * @param {RootState} state
+ * @return {*}  {TypesZ.MessageReceivedList}
+ */
+export const selectMessages = (state: RootState): TypesZ.MessageReceivedList => state.receiver.messages;
 
 
+
+export const {addMessage} = receiverSlice.actions;
 export default receiverSlice.reducer;
 
 // export const selectMessages = (state: RootState) => state.counter.value;

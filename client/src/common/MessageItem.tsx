@@ -1,9 +1,13 @@
 import React, {Fragment} from "react";
 
+import {TypesZ} from "../../../types/index";
+import {cancelMessage} from "../features/sender/senderSlice";
+import {useAppDispatch} from "../init/hooks";
+
 import styles from "./messageItem.module.css";
 
 interface props {
-	text: string,
+	message: TypesZ.MessageInSenderQueue | TypesZ.MessageFromServer
 }
 
 
@@ -14,9 +18,12 @@ interface props {
  * @return {*}  {JSX.Element}
  */
 const MessageItem = (props: props): JSX.Element => {
+	const dispatch = useAppDispatch();
+
 	return (
 		<div>
-			<p>{props.text}</p>
+			<p>{props.message.text}</p>
+			<button onClick={() => dispatch(cancelMessage(props.message.id))}>Cancel</button>;
 		</div>
 	);
 };
