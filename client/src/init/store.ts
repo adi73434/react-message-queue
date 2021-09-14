@@ -3,13 +3,20 @@
 // -----------------------------------------------------------------------------
 
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit";
-// import counterReducer from "../features/counter/counterSlice";
+import receiverSlice from "../features/receiver/receiverSlice";
+import senderSlice from "../features/sender/senderSlice";
+import sentLogSlice from "../features/sentLog/sentLogSlice";
+
+
 
 export const store = configureStore({
 	reducer: {
-		// counter: counterReducer,
+		receiver: receiverSlice,
+		sender: senderSlice,
+		sentLog: sentLogSlice,
 	},
 });
+
 
 
 export type AppDispatch = typeof store.dispatch;
