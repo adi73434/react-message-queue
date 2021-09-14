@@ -1,15 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+import {TypesZ} from "../../../../types/index";
 
-
-export interface MessageItem {
-	text: string,
-	date: Date,
-	attemptedSendToServer: boolean,
-}
 
 export interface SenderState {
-	messages: MessageItem[],
+	messages: TypesZ.MessageSenderQueue,
 }
 
 

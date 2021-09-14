@@ -1,0 +1,18 @@
+{
+	"files.exclude": {
+		// ---------------------------------------------------------------------
+		// Temporary
+		"**/.eslintrc.js": true,
+		"**/.eslintrc.cjs": true,
+		"**/package-lock.json": true,
+		"**/package.json": true,
+		"**/typedoc.json": true,
+		"**/yarn.lock": true,
+		"**/.stylelintrc.json": true,
+		"**/.eslint-global-config.js": true,
+		"**/.gitignore": true,
+		"**/tsconfig.json": true,
+		"**/nodemon.json": true
+		// ---------------------------------------------------------------------
+	}
+}

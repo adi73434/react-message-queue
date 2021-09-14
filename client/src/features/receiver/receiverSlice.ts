@@ -1,14 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+// ...lol
+import {TypesZ} from "../../../../types/index";
 
-
-export interface MessageItem {
-	text: string,
-	date: Date,
-}
 
 export interface ReceiverState {
-	messages: MessageItem[],
+	messages: TypesZ.MessageReceivedList,
 }
 
 

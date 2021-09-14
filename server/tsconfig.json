@@ -29,7 +29,7 @@
 			"ESNext"
 		],
 		"outDir": "./build/",
-		"rootDir": "",
+		"rootDirs": ["src", "../types"],
 	},
 	"include": [
 		"src"
