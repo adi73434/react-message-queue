@@ -24,6 +24,7 @@ const Sender = (): JSX.Element => {
 	return (
 		<div className={styles.container}>
 			I&apos;m the sender
+			<br></br>
 
 			{/* Alow typing and use this value for the next sent message. */}
 			<input value={message} onChange={(e) => setMessage(e.target.value)}/>
@@ -34,7 +35,7 @@ const Sender = (): JSX.Element => {
 				const msgitem = {id: sendCounter, text: message + sendCounter, sent_date: new Date().getTime(), sending: false};
 				console.log("Adding to send: " + sendCounter);
 				dispatch(addMessageToSend(msgitem));
-				// NOTE: I tried to put the "check if sending cancelled by user" login here and
+				// NOTE: I tried to put the "check if sending cancelled by user" logic here and
 				// in the prepareMessageSend reducer, but learnt that that won't work, at least not
 				// without a lot more fiddling
 				setTimeout(() => {

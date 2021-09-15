@@ -1,9 +1,6 @@
 
-
-
-
 /**
- *
+ * Convert a JavaScript Date().getTime() item to MySQL DATETIME
  *
  * @param {number} jsDateGetTime
  * @return {*}  {string}

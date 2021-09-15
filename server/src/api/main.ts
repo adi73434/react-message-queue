@@ -37,9 +37,6 @@ routerApi.get("/message/list", (req: express.Request, res: express.Response) => 
 
 routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {
 	console.log(req.params["id"]);
-	// if (req.params["id"].length > 1) {
-
-	// }
 
 	// I think if this takes an array of IDs, they're not actually ingested
 	// as an array but as a string. So this splits them all into an array of "strings"

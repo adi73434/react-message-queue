@@ -9,6 +9,7 @@
 <p>Client: </p>
 <ul>
 <li>ReactJS</li>
+<li>Redux</li>
 <li>TypeScript</li>
 </ul>
 <p>Server (if I do create one):</p>
@@ -113,9 +114,12 @@
 <li><code>&gt; npm audit fix</code></li>
 <li>Convert LF -&gt; CRLF with WSL: <code>&gt; find . -type d \( -name node_modules -o -path ./.git \) -prune -false -o -type f -name &#39;*.*&#39; -print0 | xargs -0 unix2dos</code> (Reference <a href="https://stackoverflow.com/a/4210072">here</a>)</li>
 <li>Exit WSL</li>
-<li><code>&gt; npm install express typedoc</code></li>
+<li><code>&gt; npm install typedoc react-redux react-router-dom @types/react-redux @types/react-router-dom stylelint stylelint-config-idiomatic-order</code></li>
+<li><code>&gt; npm install @reduxjs/toolkit redux-devtools</code></li>
 </ul>
 <p>Note that for some reasons, TypeDoc was only documenting things that were <em>exported</em> from within the <code>index.tsx</code> file. So everything has to be exported pointlessly like this, even though on another project this wasn&#39;t the case.</p>
+<p>I copied/referenced the folder structure and some of the files (<code>app/hooks.ts</code>, <code>app/store.ts</code>) from <code>npx create-react-app --template redux-typescript</code>. Reading the docs and going through the template folder feels like a haze dream now, so I don&#39;t know exactly what came from what.</p>
+<p>I also set up React&#39;s dynamic routing within the <code>features/app.ts</code> file; however, this can be extended with nested routes within other files.</p>
 
 <a href="#server" id="server" style="color: inherit; text-decoration: none;">
   <h3>Server</h3>
@@ -128,4 +132,4 @@
 <li>I copied my nodemon config from <a href="https://github.com/adi73434/web-tutorials-and-snippets/blob/master/nodemon.json">here</a></li>
 <li>Specify type as module in package.json</li>
 </ul>
-</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-variable"><a href="modules.html#default" class="tsd-kind-icon">default</a></li><li class="tsd-kind-function"><a href="modules.html#asdf" class="tsd-kind-icon">asdf</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-variable"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

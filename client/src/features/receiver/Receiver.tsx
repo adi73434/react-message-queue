@@ -35,13 +35,14 @@ const Receiver = (): JSX.Element => {
 	return (
 		<div className={styles.container}>
 			I&apos;m the receiver
+			<br></br>
+
 			<button onClick={() => {
 				dispatch(clearMessagesClientAndServer());
 			}}>Clear all messages (server + client)</button>
 
 			{messages.map((msg: any, idx: any) => {
 				return <MessageItem key={idx} message={msg}></MessageItem>;
-				// return msg;
 			})}
 
 		</div>
