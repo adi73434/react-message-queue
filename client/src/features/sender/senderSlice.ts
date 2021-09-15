@@ -75,12 +75,19 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 		}
 
 		if (!msg.cancelledByUser) {
-		// This is used to know the index, and to keep track of whether or not
-		// the item exists and this can continue... though it should
+			// This is used to know the index, and to keep track of whether or not
+			// the item exists and this can continue... though it should
 			stateIndexOfMessageToSend = idx;
 			return false;
 		}
 	});
+
+	// Equivalent of above, but won't break out/stop if found correct one
+	// state.sender.messages.forEach((msg, idx) => {
+	// 	if (msg.id === messageId) {
+	// 		stateIndexOfMessageToSend = idx;
+	// 	}
+	// });
 
 	if (stateIndexOfMessageToSend === undefined) {
 		return;
@@ -139,7 +146,7 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 					text: state.sender.messages[stateIndexOfMessageToSend].text,
 					sent_date: state.sender.messages[stateIndexOfMessageToSend].sent_date,
 				}));
-				dispatch(removeMessage(stateIndexOfMessageToSend));
+				dispatch(removeMessage(messageId));
 			}
 		}).finally();
 };
