@@ -16,6 +16,15 @@ import type {RootState, AppDispatch} from "./store";
  *
  * @return {*}  {ThunkDispatch<{ counter: unknown; }, null, AnyAction>}
  */
-export const useAppDispatch = (): ThunkDispatch<{ counter: unknown; }, null, AnyAction> => useDispatch<AppDispatch>();
+// export const useAppDispatch = (): ThunkDispatch<{ counter: unknown; }, null, AnyAction> => useDispatch<AppDispatch>();
+
+/**
+ * I had an issue with the typing on the above useAppDispatch, so I just used this which is how it
+ * was in the redux/react/typescript template
+ *
+ * @return {*}  {*}
+ */
+export const useAppDispatch = (): any => useDispatch<AppDispatch>();
+
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

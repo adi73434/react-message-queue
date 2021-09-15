@@ -3,7 +3,7 @@ import {useStore} from "react-redux";
 import MessageItem from "../../common/MessageItem";
 import {useAppDispatch, useAppSelector} from "../../init/hooks";
 import styles from "./sender.module.css";
-import {cancelMessage, commitMessage, prepareMessageSend, selectMessages} from "./senderSlice";
+import {commitMessage, selectMessages, addMessageToSend} from "./senderSlice";
 
 
 /**
@@ -33,7 +33,7 @@ const Sender = (): JSX.Element => {
 				// increment sent ID and add it to send queue
 				const msgitem = {id: sendCounter, text: message + sendCounter, sent_date: new Date().getTime(), sending: false};
 				console.log("Adding: " + sendCounter);
-				dispatch(prepareMessageSend(msgitem));
+				dispatch(addMessageToSend(msgitem));
 				// NOTE: I tried to put the "check if sending cancelled by user" login here and
 				// in the prepareMessageSend reducer, but learnt that that won't work, at least not
 				// without a lot more fiddling

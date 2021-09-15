@@ -50,18 +50,6 @@ export namespace Typez {
 export namespace ServerUserErrors {
 
 	
-	// FIXME: For some fucking reason, TypeScript gives this error:
-	// -------------------------------------------------------------------------
-	// SyntaxError: Named export 'ServerUserErrors' not found. The requested module '../../../types/index' is a CommonJS module, which may not support all module.exports as named exports.
-	// CommonJS modules can always be imported via the default export, for example using:
-	// -------------------------------------------------------------------------
-	// which is a lie, because this is not a CommonJS file. And this is only caused because of the export enum,
-	// and this also only happens when the file is outisde of the server dir
-
-	// export const enum type {
-	// 	MISSING_REQUIRED_FIELD = "MISSING_REQUIRED_FIELD",
-	// 	REQUIRED_FIELD_TOO_SHORT = "REQUIRED_FIELD_TOO_SHORT"
-	// }
 	export interface Response {
 		type: "MISSING_REQUIRED_FIELD" | "REQUIRED_FIELD_TOO_SHORT",
 		errorConcerns?: string,

@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 
 import {Typez} from "../../../types/index";
-import {cancelMessage} from "../features/sender/senderSlice";
+import {removeMessage} from "../features/sender/senderSlice";
 import {useAppDispatch} from "../init/hooks";
 
 import styles from "./messageItem.module.css";
@@ -74,6 +74,26 @@ const MessageItem = (props: props): JSX.Element => {
 		return timeMs;
 	};
 
+	/**
+	 *
+	 *
+	 * @return {*}  {JSX.Element}
+	 */
+	const showSendingStatus = (): JSX.Element => {
+		let ret: JSX.Element = <Fragment/>;
+
+		// If from sender, check stauts
+		if (props.senderExtras) {
+			ret = props.senderExtras.sending ? <p>Sending...</p> : <p>Waiting...</p>;
+		}
+		// If not from sender and not from receiver, presume that it's in the sent log.
+		// This is very dumb but I'm not going to be expanding on this component... I hope
+		else if (!props.receiverExtras) {
+			ret = <p>Messaeg Sent</p>;
+		}
+		return ret;
+	};
+
 	return (
 		// {setInterval(() => {
 		// 	// TypeScript was complaining here...
@@ -87,8 +107,8 @@ const MessageItem = (props: props): JSX.Element => {
 				<p>Time to cancel: {timeLeftToCancel}</p> :
 				""
 			}
-			<button onClick={() => dispatch(cancelMessage(props.message.id))} disabled={props.senderExtras?.sending}>Cancel</button>
-			{props.senderExtras?.sending ? <p>Sending...</p> : <p>Waiting...</p>}
+			<button onClick={() => dispatch(removeMessage(props.message.id))} disabled={props.senderExtras?.sending}>Cancel</button>
+			{showSendingStatus()}
 		</div>
 	);
 };
