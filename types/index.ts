@@ -13,9 +13,10 @@ export namespace TypesZ {
 
 	export interface MessageInSenderQueue extends MessageBasic {
 		// eslint-disable-next-line
-		sent_date?: number,
+		sent_date: number,
 		attemptedToSend?: boolean,
 		cancelledByUser?: boolean,
+		sending: boolean,
 	}
 
 	export interface MessageInSentLog extends MessageBasic {

@@ -1,8 +1,9 @@
 import React, {Fragment, useState} from "react";
+import {useStore} from "react-redux";
 import MessageItem from "../../common/MessageItem";
 import {useAppDispatch, useAppSelector} from "../../init/hooks";
 import styles from "./sender.module.css";
-import {cancelMessage, prepareMessageSend, selectMessages} from "./senderSlice";
+import {cancelMessage, commitMessage, prepareMessageSend, selectMessages} from "./senderSlice";
 
 
 /**
@@ -18,21 +19,34 @@ const Sender = (): JSX.Element => {
 	const messages = useAppSelector(selectMessages);
 	const dispatch = useAppDispatch();
 	// Just a dumb way of having an id of the sent msg
-	const [sendCounter, setsendCounter] = useState(0);
-
+	const [sendCounter, setSendCounter] = useState(0);
+	const [message, setMessage] = useState("");
 	return (
 		<div className={styles.container}>
 			I&apos;m the sender
 
+			{/* Alow typing and use this value for the next sent message. */}
+			<input value={message} onChange={(e) => setMessage(e.target.value)}/>
+
 			<button onClick={() => {
+				// const count = sendCounter;
 				// increment sent ID and add it to send queue
-				setsendCounter(sendCounter + 1);
-				const msgitem = {id: sendCounter, text: "asdf" + sendCounter, sent_date: new Date().getDate()};
+				const msgitem = {id: sendCounter, text: message + sendCounter, sent_date: new Date().getTime(), sending: false};
+				console.log("Adding: " + sendCounter);
 				dispatch(prepareMessageSend(msgitem));
+				// NOTE: I tried to put the "check if sending cancelled by user" login here and
+				// in the prepareMessageSend reducer, but learnt that that won't work, at least not
+				// without a lot more fiddling
+				setTimeout(() => {
+					// After (x time), check if the user has cancelled this message from sending,
+					// if not, send the message
+					dispatch(commitMessage(sendCounter));
+				}, parseInt(process.env.REACT_APP_MS_TO_SEND_MSG || "5000"));
+				setSendCounter(sendCounter + 1);
 			}}>Send msg</button>
 
 			{messages.map((msg) => {
-				return <MessageItem key={msg.id} message={msg}></MessageItem>;
+				return <MessageItem key={msg.id} message={msg} senderExtras={msg}></MessageItem>;
 				// return
 			})}
 		</div>

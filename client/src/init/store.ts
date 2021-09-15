@@ -7,6 +7,7 @@ import receiverSlice from "../features/receiver/receiverSlice";
 import senderSlice from "../features/sender/senderSlice";
 import sentLogSlice from "../features/sentLog/sentLogSlice";
 
+// import thunk from "redux-thunk";
 
 
 export const store = configureStore({

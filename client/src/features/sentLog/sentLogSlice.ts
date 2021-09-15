@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {TypesZ} from "../../../../types/index";
 
@@ -20,8 +20,9 @@ export const sentLogSlice = createSlice({
 	name: "sentLog",
 	initialState,
 	reducers: {
-		addMessage: (state) => {
+		addMessage: (state, action: PayloadAction<TypesZ.MessageInSentLog>) => {
 			// This adds the message to the store
+			state.messages.push(action.payload);
 		},
 	},
 });
