@@ -101,16 +101,23 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 			sent_date: state.sender.messages[stateIndexOfMessageToSend].sent_date,
 		}),
 	})
-		.then((response) => {
-		// "What the fuck": https://stackoverflow.com/a/47267312/13310905
-			response.json().then((data) => {
-				({status: response.status, body: data});
-			});
-		})
+	// .then((response) => {
+	// "What the fuck": https://stackoverflow.com/a/47267312/13310905
+	// response.json().then((data) => {
+	// ({status: response.status, body: data});
+	// });
+	// NOTE: In the above implementation, if the server sometimes does not return a JSON payload,
+	// and that is intended, then you can catch wihin the block above. I decided to just
+	// not do that and refactored this a bit
+	// })
+		.then((response) => response.json())
 		.then((data: any) => {
-			if (status === "400") {
+			if (data.status === "error") {
 			// If status is 400, we know it was an error, so re-type it
 				const errData = data.error as ServerUserErrors.Response;
+				// TODO: Refactor the way the errors are done, by using a function
+				// that checks against an object of defined errors/responses,
+				// instead of this type mess
 				if (errData.type === "MISSING_REQUIRED_FIELD") {
 					alert("Missing required field: " + errData.errorConcerns);
 				}
@@ -119,21 +126,22 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 				}
 				return;
 			}
+			else if (data.status === "success") {
+				// For some reason typescript was comaplioning about stateIndexOfMessageToSend
+				// potentially being undefined even though I literally check above
+				if (stateIndexOfMessageToSend === undefined) {
+					return;
+				}
 
-			// For some reason typescript was comaplioning about it potentially being
-			// undefined even though I literally check above
-			if (stateIndexOfMessageToSend === undefined) {
-				return;
+				// Add message to sent log then remove from this store
+				dispatch(logSentMessage({
+					id: state.sender.messages[stateIndexOfMessageToSend].id,
+					text: state.sender.messages[stateIndexOfMessageToSend].text,
+					sent_date: state.sender.messages[stateIndexOfMessageToSend].sent_date,
+				}));
+				dispatch(removeMessage(stateIndexOfMessageToSend));
 			}
-
-			// Add message to sent log then remove from this store
-			dispatch(logSentMessage({
-				id: state.sender.messages[stateIndexOfMessageToSend].id,
-				text: state.sender.messages[stateIndexOfMessageToSend].text,
-				sent_date: state.sender.messages[stateIndexOfMessageToSend].sent_date,
-			}));
-			dispatch(removeMessage(stateIndexOfMessageToSend));
-		});
+		}).finally();
 };
 // state.messages = state.messages.filter((item) => item.id !== action.payload);
 

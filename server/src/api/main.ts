@@ -45,7 +45,8 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 			desc: "Missing text",
 			request: "/message/add",
 		};
-		res.status(400).json({error: msg});
+		res.status(400).json({status: "error", error: msg});
+		res.end();
 		console.log("missing1");
 		return;
 	}
@@ -56,7 +57,8 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 			desc: "Missing text",
 			request: "/message/add",
 		};
-		res.status(400).json({error: msg});
+		res.status(400).json({status: "error", error: msg});
+		res.end();
 		console.log("missing2");
 		return;
 	}
@@ -68,6 +70,9 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 		// I don't know if the response should be ended before throwing an error if there is an error.
 		if (err) throw err;
 		console.log("added");
+		// To my knowledge, returning json here is unnecssary, but then the JSON-expecting client
+		// would throw an error. I put a note about this (with the workaround) in commitMessage in senderSlice
+		res.status(200).json({status: "success"});
 		res.end();
 	});
 });

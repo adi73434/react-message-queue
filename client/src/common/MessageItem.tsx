@@ -89,7 +89,7 @@ const MessageItem = (props: props): JSX.Element => {
 		// If not from sender and not from receiver, presume that it's in the sent log.
 		// This is very dumb but I'm not going to be expanding on this component... I hope
 		else if (!props.receiverExtras) {
-			ret = <p>Messaeg Sent</p>;
+			ret = <p>Message Sent</p>;
 		}
 		return ret;
 	};
