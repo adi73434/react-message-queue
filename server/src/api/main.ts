@@ -36,7 +36,7 @@ routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {
 
 routerApi.post("/message/add", (req: express.Request, res: express.Response) => {
 	// console.log(JSON.parse(req.body));
-	console.log(req.body);
+	console.log("/message/add", req.body);
 	// I don't know if this is how I should be handling "errors" or "bad requests"
 	if (req.body["text"] === undefined) {
 		const msg: ServerUserErrors.Response = {
@@ -47,7 +47,6 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 		};
 		res.status(400).json({status: "error", error: msg});
 		res.end();
-		console.log("missing1");
 		return;
 	}
 	else if (req.body["text"].length < 4) {
@@ -59,7 +58,6 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 		};
 		res.status(400).json({status: "error", error: msg});
 		res.end();
-		console.log("missing2");
 		return;
 	}
 
@@ -69,7 +67,6 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 	makeDbConn().query("INSERT into messages (id, text, sent_date) VALUES (?, ?, ?)", [null, req.body["text"], sqlTime], (err: any, result: any) => {
 		// I don't know if the response should be ended before throwing an error if there is an error.
 		if (err) throw err;
-		console.log("added");
 		// To my knowledge, returning json here is unnecssary, but then the JSON-expecting client
 		// would throw an error. I put a note about this (with the workaround) in commitMessage in senderSlice
 		res.status(200).json({status: "success"});

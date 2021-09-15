@@ -107,7 +107,8 @@ const MessageItem = (props: props): JSX.Element => {
 				<p>Time to cancel: {timeLeftToCancel}</p> :
 				""
 			}
-			<button onClick={() => dispatch(removeMessage(props.message.id))} disabled={props.senderExtras?.sending}>Cancel</button>
+			{/* Only show cancel button if in the sender display */}
+			{props.senderExtras ? <button onClick={() => dispatch(removeMessage(props.message.id))} disabled={props.senderExtras?.sending}>Cancel</button> : ""}
 			{showSendingStatus()}
 		</div>
 	);

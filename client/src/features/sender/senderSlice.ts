@@ -129,7 +129,10 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 					alert("Missing required field: " + errData.errorConcerns);
 				}
 				else if (errData.type === "REQUIRED_FIELD_TOO_SHORT") {
-					alert(errData.errorConcerns + "is too short (must be 4 or longer)");
+					alert(errData.errorConcerns + " is too short (must be 4 or longer)");
+					setTimeout(() => {
+						dispatch(removeMessage(messageId));
+					}, 2000);
 				}
 				return;
 			}
