@@ -153,29 +153,6 @@ export const commitMessage = (messageId: number): AppThunk => (dispatch, getStat
 			}
 		}).finally();
 };
-// state.messages = state.messages.filter((item) => item.id !== action.payload);
-
-
-// export const selectWasMessageCancelled = (state: RootState, msgId: number): boolean => {
-// 	let wasCancelled = false;
-// 	// What a mess.
-// 	// This checks if the specified message ID has been cancelled or not
-// 	// Every stops/breaks when the return is false; hence, return false when the correct
-// 	// item was found
-// 	state.sender.messages.every((msg) => {
-// 		if (msg.id === msgId) {
-// 			if (msg.cancelledByUser === undefined ) {
-// 				wasCancelled = false;
-// 			}
-// 			else {
-// 				wasCancelled = msg.cancelledByUser;
-// 			}
-// 			return false;
-// 		}
-// 	});
-// 	return wasCancelled;
-// };
-
 
 
 export const {addMessageToSend, removeMessage, setMesageSending} = senderSlice.actions;

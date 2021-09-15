@@ -30,7 +30,7 @@ routerApi.get("/message/list", (req: express.Request, res: express.Response) => 
 				flatList.push(element.id);
 			}
 		}
-		res.status(200).send(JSON.stringify(flatList));
+		res.status(200).send({status: "success", list: flatList});
 		res.end();
 	});
 });
