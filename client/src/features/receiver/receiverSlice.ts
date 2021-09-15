@@ -27,8 +27,30 @@ export const receiverSlice = createSlice({
 		addMessage: (state: ReceiverState, action: PayloadAction<Typez.MessageFromServer | Typez.MessageFromServer[]>) => {
 			state.messages = state.messages.concat(action.payload);
 		},
-		addNeededMessage: (state: ReceiverState, action: PayloadAction<number | number[]>) => {
+		addToQueue: (state: ReceiverState, action: PayloadAction<number | number[]>) => {
 			state.neededMessages = state.neededMessages.concat(action.payload);
+		},
+		removeFromQueue: (state: ReceiverState, action: PayloadAction<number[]>) => {
+			// "hashmap" to keep track of fetched items
+			const alreadyFetched: {[key: number]: boolean} = {};
+
+			// With the way this works. alreadyFetched directly "maps"
+			// to the action.payload[x] msgId, so if the msgId within the payload
+			// has been "mapped" as true (existing in the received state), it can
+			// be discarded from needed
+			state.messages.forEach((msg) => {
+				alreadyFetched[msg.id] = true;
+			});
+
+			state.neededMessages = action.payload.filter((msgId: number) => {
+				return alreadyFetched[msgId];
+			});
+		},
+		wipeQueue: (state: ReceiverState) => {
+			state.neededMessages = [];
+		},
+		clearMessages: (state: ReceiverState) => {
+			state.messages = [];
 		},
 	},
 });
@@ -43,7 +65,7 @@ export const selectMessages = (state: RootState): Typez.MessageReceivedList => s
 
 
 /**
- * Check if new messages exist on the server and add them to the store if they do.
+ * Check if new messages exist on the server and add their IDs to the store.
  *
  *
  * @return {*}  {AppThunk}
@@ -63,22 +85,6 @@ export const checkNewMessages = (): AppThunk => (dispatch, getState) => {
 		.then((response) => response.json())
 		.then((data) => {
 			if (data.status === "success") {
-				// console.log(data.list);
-				// state.receiver.messages.forEach((recMsg) => {
-				// 	if ()
-				// });
-
-				// Filter creates new array with all items that pass the test inside
-				// const neededMessages = data.list.filter((newMsg: number) => {
-				// ONLY add new neededMessages if:
-				// - they are *not* already part of the already received messages; and
-				// - they are *not* already part of the needed messages, neg 1.
-				// NOTE: This implementation relied on the PK in the DB starting at 1 (hence neg 1),
-				// and that it never skips a key.
-				// return !state.receiver.messages[newMsg] && !state.receiver.neededMessages[newMsg];
-
-				// });
-
 				// See: https://stackoverflow.com/a/9736915
 				const alreadyReceived: {[key: number]: boolean} = {};
 				const alreadyQueued: {[key: number]: boolean} = {};
@@ -97,16 +103,80 @@ export const checkNewMessages = (): AppThunk => (dispatch, getState) => {
 					return !alreadyReceived[msgId] && !alreadyQueued[msgId];
 				});
 
-				console.log("Needed Messages: " + neededMessages);
-				dispatch(addNeededMessage(neededMessages));
-				console.log(state.receiver.neededMessages);
+				dispatch(addToQueue(neededMessages));
+			}
+		});
+};
+
+
+/**
+ *
+ *
+ * @return {*}  {AppThunk}
+ */
+export const clearMessagesClientAndServer = (): AppThunk => (dispatch, getState) => {
+	const state = getState();
+
+	fetch(process.env.REACT_APP_API_URI + "message/all", {
+		method: "DELETE",
+		headers: {
+			"Accept": "application/json, text/plain, */*",
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data.status === "success") {
+				// TODO: I think there could/would be a condition where a fetch is made and new messages
+				// get stored after these get dispatched.
+				// I really can't be bothered accounting for that rn, though
+				dispatch(wipeQueue());
+				dispatch(clearMessages());
+			}
+		});
+};
+
+/**
+ * Fetch the new needed messages in the store and store the full message data
+ *
+ * @return {*}  {AppThunk}
+ */
+export const receiveNewMessages = (): AppThunk => (dispatch, getState) => {
+	const state = getState();
+
+	if (state.receiver.neededMessages.length < 1) {
+		return;
+	}
+
+	console.log(process.env.REACT_APP_API_URI + "message/" + JSON.stringify(state.receiver.neededMessages));
+
+	fetch(process.env.REACT_APP_API_URI + "message/" + state.receiver.neededMessages, {
+		method: "GET",
+		// mode: "cors",
+		// credentials: "omit",
+		headers: {
+			"Accept": "application/json, text/plain, */*",
+			"Content-Type": "application/json",
+		},
+		// body: JSON.stringify({
+		// 	idList: state.receiver.neededMessages,
+		// }),
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			if (data.status === "success") {
+				console.log("AAAAAAAAAAA");
+				dispatch(addMessage(data.list));
+				dispatch(removeFromQueue(data.list));
 			}
 		});
 };
 
 
 
-export const {addMessage, addNeededMessage} = receiverSlice.actions;
+export const {addMessage, addToQueue, removeFromQueue, wipeQueue, clearMessages} = receiverSlice.actions;
 export default receiverSlice.reducer;
 
 // export const selectMessages = (state: RootState) => state.counter.value;

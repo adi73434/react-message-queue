@@ -30,21 +30,39 @@ routerApi.get("/message/list", (req: express.Request, res: express.Response) => 
 				flatList.push(element.id);
 			}
 		}
-		res.status(200).send({status: "success", list: flatList});
+		res.status(200).json({status: "success", list: flatList});
 		res.end();
 	});
 });
 
 routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {
-	makeDbConn().query("SELECT * FROM messages WHERE id = ?", [req.params["id"]], (err: MysqlError | null, result: Typez.MessageFromServer) => {
+	console.log(req.params["id"]);
+	// if (req.params["id"].length > 1) {
+
+	// }
+
+	// I think if this takes an array of IDs, they're not actually ingested
+	// as an array but as a string. So this splits them all into an array of "strings"
+	// which are the ID numbers
+	const msgIds = req.params["id"].split(",");
+	let query;
+	// Only run the "in" query if received more than one msg ID.
+	// This is probably pointless but IDK the performance implications of the IN operator
+	if (msgIds.length > 1) {
+		query="SELECT * FROM messages WHERE id IN (?)";
+	}
+	else {
+		console.log("using equals");
+		query="SELECT * FROM messages WHERE id = ?";
+	}
+	makeDbConn().query(query, [msgIds], (err: MysqlError | null, result: Typez.MessageFromServer[]) => {
 		if (err) throw err;
-		// res.status(200).send(result);
-		// res.send(JSON.stringify({msg: "test"}));
-		res.send("test2");
+		// Limit returned array count. It's unnecessary here but whatever
+		const trimmedRes = result.length > 5 ? result.slice(0, 5) : result;
+		res.status(200).json({status: "success", list: trimmedRes});
 		res.end();
 	});
 });
-
 
 routerApi.post("/message/add", (req: express.Request, res: express.Response) => {
 	// console.log(JSON.parse(req.body));
@@ -81,6 +99,15 @@ routerApi.post("/message/add", (req: express.Request, res: express.Response) => 
 		if (err) throw err;
 		// To my knowledge, returning json here is unnecssary, but then the JSON-expecting client
 		// would throw an error. I put a note about this (with the workaround) in commitMessage in senderSlice
+		res.status(200).json({status: "success"});
+		res.end();
+	});
+});
+
+
+routerApi.delete("/message/all", (req: express.Request, res: express.Response) => {
+	makeDbConn().query("DELETE FROM messages WHERE 1", (err: MysqlError | null, result: Typez.MessageFromServer) => {
+		if (err) throw err;
 		res.status(200).json({status: "success"});
 		res.end();
 	});

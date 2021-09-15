@@ -35,7 +35,6 @@ const MessageItem = (props: props): JSX.Element => {
 	// Start the checker interval on mount
 	useEffect(() => {
 		let clearOnLeave = true;
-		console.log("asdf");
 		// Every few ms update the time left to cancel
 		// This should probably be done with a simple decrement or animation rather than reading the props
 		// and doing all this

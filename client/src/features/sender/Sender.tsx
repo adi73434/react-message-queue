@@ -32,7 +32,7 @@ const Sender = (): JSX.Element => {
 				// const count = sendCounter;
 				// increment sent ID and add it to send queue
 				const msgitem = {id: sendCounter, text: message + sendCounter, sent_date: new Date().getTime(), sending: false};
-				console.log("Adding: " + sendCounter);
+				console.log("Adding to send: " + sendCounter);
 				dispatch(addMessageToSend(msgitem));
 				// NOTE: I tried to put the "check if sending cancelled by user" login here and
 				// in the prepareMessageSend reducer, but learnt that that won't work, at least not
