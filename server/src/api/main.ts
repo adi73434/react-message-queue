@@ -20,13 +20,19 @@ const routerApi = express.Router();
 
 
 routerApi.get("/message/list", (req: express.Request, res: express.Response) => {
-	// makeDbConn().query("SELECT * FROM messages WHERE 1", (err: MysqlError | null, result: Typez.MessageFromServer[]) => {
-	// if (err) throw err;
-	// console.log(JSON.stringify({user: result[0]}));
-	// res.status(200).send(JSON.stringify({user: result[0]}));
-	res.send("test");
-	res.end();
-	// });
+	makeDbConn().query("SELECT id FROM messages WHERE 1", (err: MysqlError | null, result: Array<{id: number}>) => {
+		if (err) throw err;
+		const flatList: number[] = [];
+		// Loop over the RowDataPacket objects and get their values into the flat array
+		for (const key in result) {
+			if (Object.prototype.hasOwnProperty.call(result, key)) {
+				const element = result[key];
+				flatList.push(element.id);
+			}
+		}
+		res.status(200).send(JSON.stringify(flatList));
+		res.end();
+	});
 });
 
 routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {

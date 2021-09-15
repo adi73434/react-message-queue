@@ -17,8 +17,21 @@ const Receiver = (): JSX.Element => {
 
 	useEffect(() => {
 		const checknewMessageInterval = setInterval(() => {
+			// fetch(process.env.REACT_APP_API_URI + "message/list", {
+			// 	method: "GET",
+			// 	// mode: "cors",
+			// 	// credentials: "omit",
+			// 	headers: {
+			// 		"Accept": "application/json, text/plain, */*",
+			// 		"Content-Type": "application/json",
+			// 	},
+			// })
+			// 	.then((response) => response.text())
+			// 	.then((data) => {
+			// 		console.log(data);
+			// 	});
 			dispatch(checkNewMessages());
-		}, 1000);
+		}, 500);
 		return () => {
 			clearInterval(checknewMessageInterval);
 		};

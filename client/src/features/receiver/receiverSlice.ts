@@ -46,18 +46,14 @@ export const selectMessages = (state: RootState): Typez.MessageReceivedList => s
 export const checkNewMessages = (): AppThunk => (dispatch, getState) => {
 	fetch(process.env.REACT_APP_API_URI + "message/list", {
 		method: "GET",
-		mode: "cors",
+		// mode: "cors",
 		// credentials: "omit",
 		headers: {
 			"Accept": "application/json, text/plain, */*",
 			"Content-Type": "application/json",
 		},
 	})
-		.then((response) => {
-			console.log(response.text());
-			// response.json();
-		},
-		)
+		.then((response) => response.text())
 		.then((data) => {
 			console.log(data);
 		});
