@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 // ...lol
 import {Typez} from "../../../../types/index";
-import {RootState} from "../../init/store";
+import {AppThunk, RootState} from "../../init/store";
 
 
 export interface ReceiverState {
@@ -35,6 +35,33 @@ export const receiverSlice = createSlice({
  * @return {*}  {TypesZ.MessageReceivedList}
  */
 export const selectMessages = (state: RootState): Typez.MessageReceivedList => state.receiver.messages;
+
+
+/**
+ * Check if new messages exist on the server and add them to the store if they do.
+ *
+ *
+ * @return {*}  {AppThunk}
+ */
+export const checkNewMessages = (): AppThunk => (dispatch, getState) => {
+	fetch(process.env.REACT_APP_API_URI + "message/list", {
+		method: "GET",
+		mode: "cors",
+		// credentials: "omit",
+		headers: {
+			"Accept": "application/json, text/plain, */*",
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => {
+			console.log(response.text());
+			// response.json();
+		},
+		)
+		.then((data) => {
+			console.log(data);
+		});
+};
 
 
 

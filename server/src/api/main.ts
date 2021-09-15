@@ -20,16 +20,22 @@ const routerApi = express.Router();
 
 
 routerApi.get("/message/list", (req: express.Request, res: express.Response) => {
-	makeDbConn().query("SELECT * FROM messages WHERE 1", (err: MysqlError | null, result: Typez.MessageFromServer[]) => {
-		if (err) throw err;
-		res.send(result);
-	});
+	// makeDbConn().query("SELECT * FROM messages WHERE 1", (err: MysqlError | null, result: Typez.MessageFromServer[]) => {
+	// if (err) throw err;
+	// console.log(JSON.stringify({user: result[0]}));
+	// res.status(200).send(JSON.stringify({user: result[0]}));
+	res.send("test");
+	res.end();
+	// });
 });
 
 routerApi.get("/message/:id", (req: express.Request, res: express.Response) => {
 	makeDbConn().query("SELECT * FROM messages WHERE id = ?", [req.params["id"]], (err: MysqlError | null, result: Typez.MessageFromServer) => {
 		if (err) throw err;
-		res.send(result);
+		// res.status(200).send(result);
+		// res.send(JSON.stringify({msg: "test"}));
+		res.send("test2");
+		res.end();
 	});
 });
 
