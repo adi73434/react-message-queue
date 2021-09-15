@@ -31,7 +31,7 @@
 			"ESNext"
 		],
 		"outDir": "",
-		"rootDirs": ["src", "../types"],
+		"rootDirs": ["src"],
 	},
 	"include": [
 		"src"

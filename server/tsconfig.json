@@ -28,8 +28,12 @@
 		"lib": [
 			"ESNext"
 		],
+		// "baseUrl": ".",
 		"outDir": "./build/",
 		"rootDirs": ["src", "../types"],
+		// "paths": {
+		// "@Typez/*": ["../types/*"],
+		// },
 	},
 	"include": [
 		"src"

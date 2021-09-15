@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 
-import {TypesZ} from "../../../types/index";
+import {Typez} from "../../../types/index";
 import {cancelMessage} from "../features/sender/senderSlice";
 import {useAppDispatch} from "../init/hooks";
 
@@ -15,9 +15,9 @@ interface props {
 	// on the context.
 	// This should probably be done with an if/ternary statement/expression,
 	// or by just having two components
-	message: TypesZ.MessageBasic,
-	senderExtras?: TypesZ.MessageInSenderQueue,
-	receiverExtras?: TypesZ.MessageFromServer,
+	message: Typez.MessageBasic,
+	senderExtras?: Typez.MessageInSenderQueue,
+	receiverExtras?: Typez.MessageFromServer,
 }
 
 

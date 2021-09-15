@@ -1,11 +1,21 @@
-
+// -----------------------------------------------------------------------------
+// NOTE
+// FIXME
+// and a general developer warning:
+// You cannot use enums in this file:
+// - React will tell you that the file resides outside of the src/ dir, but
+// it does not complain about that for anything else in here thus far
+// - The server complains that this is a CommonJS file, but this, again,
+// only occurs for enums.
+// Basically, don't use enums in here.
+// -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 // NOTE: The Z in TypesZ is just for uniqueness, just in case
 // I decided to use this file for common types for the server and client.
 // Probably a bad idea now that I think about it, or at least annoying to get used to.
 // -----------------------------------------------------------------------------
-export namespace TypesZ {
+export namespace Typez {
 	export interface MessageBasic {
 		id: number,
 		text: string,
@@ -32,10 +42,30 @@ export namespace TypesZ {
 		// hence why I split this
 	}
 
-
-
 	// See: https://stackoverflow.com/a/41690796/13310905
 	export interface MessageSenderQueue extends Array<MessageInSenderQueue> {};
 	export interface MessageSentLog extends Array<MessageInSentLog> {};
-	export interface MessageReceivedList extends Array<MessageFromServer> {};
+	export interface MessageReceivedList extends Array<MessageFromServer> {};	
+}
+export namespace ServerUserErrors {
+
+	
+	// FIXME: For some fucking reason, TypeScript gives this error:
+	// -------------------------------------------------------------------------
+	// SyntaxError: Named export 'ServerUserErrors' not found. The requested module '../../../types/index' is a CommonJS module, which may not support all module.exports as named exports.
+	// CommonJS modules can always be imported via the default export, for example using:
+	// -------------------------------------------------------------------------
+	// which is a lie, because this is not a CommonJS file. And this is only caused because of the export enum,
+	// and this also only happens when the file is outisde of the server dir
+
+	// export const enum type {
+	// 	MISSING_REQUIRED_FIELD = "MISSING_REQUIRED_FIELD",
+	// 	REQUIRED_FIELD_TOO_SHORT = "REQUIRED_FIELD_TOO_SHORT"
+	// }
+	export interface Response {
+		type: "MISSING_REQUIRED_FIELD" | "REQUIRED_FIELD_TOO_SHORT",
+		errorConcerns?: string,
+		desc: string,
+		request: string,
+	}
 }

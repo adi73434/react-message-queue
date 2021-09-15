@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {TypesZ} from "../../../../types/index";
+import {Typez} from "../../../../types/index";
 
 
 
 export interface SentLogState {
-	messages: TypesZ.MessageSentLog
+	messages: Typez.MessageSentLog
 }
 
 
@@ -20,7 +20,7 @@ export const sentLogSlice = createSlice({
 	name: "sentLog",
 	initialState,
 	reducers: {
-		addMessage: (state, action: PayloadAction<TypesZ.MessageInSentLog>) => {
+		addMessage: (state, action: PayloadAction<Typez.MessageInSentLog>) => {
 			// This adds the message to the store
 			state.messages.push(action.payload);
 		},

@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import styles from "./receiver.module.css";
 
-import {TypesZ} from "../../../../types/index";
+import {Typez} from "../../../../types/index";
 import {useAppDispatch, useAppSelector} from "../../init/hooks";
 import MessageItem from "../../common/MessageItem";
 import {addMessage, selectMessages} from "./receiverSlice";
@@ -19,7 +19,7 @@ const Receiver = (): JSX.Element => {
 		<div className={styles.container}>
 			I&apos;m the receiver
 
-			{messages.map((msg, idx) => {
+			{messages.map((msg: any, idx: any) => {
 				return <MessageItem key={idx} message={msg}></MessageItem>;
 				// return msg;
 			})}

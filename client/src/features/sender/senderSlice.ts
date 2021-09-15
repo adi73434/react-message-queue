@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {TypesZ} from "../../../../types/index";
+import {ServerUserErrors, Typez} from "../../../../types/index";
 import {useAppDispatch} from "../../init/hooks";
 import {RootState, store} from "../../init/store";
 
 
 export interface SenderState {
-	messages: TypesZ.MessageSenderQueue,
+	messages: Typez.MessageSenderQueue,
 }
 
 
@@ -22,7 +22,7 @@ export const senderSlice = createSlice({
 	initialState,
 	reducers: {
 		// Add the message to the list of messages to send
-		prepareMessageSend: (state: SenderState, action: PayloadAction<TypesZ.MessageInSenderQueue>) => {
+		prepareMessageSend: (state: SenderState, action: PayloadAction<Typez.MessageInSenderQueue>) => {
 			// This adds the message to the store
 			state.messages.push(action.payload);
 		},
@@ -60,6 +60,41 @@ export const senderSlice = createSlice({
 
 			state.messages[stateIndexOfMessageToSend].sending = true;
 
+			// Send data. If server returns a-ok, remove this msg from this store and add it to sentLogSlice
+			fetch(process.env.REACT_APP_API_URI + "message/add", {
+				method: "POST",
+				credentials: "omit",
+				headers: {
+					"Accept": "application/json, text/plain, */*",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					text: state.messages[stateIndexOfMessageToSend].text,
+					sent_date: state.messages[stateIndexOfMessageToSend].sent_date,
+				}),
+			})
+				.then((response) => {
+					// "What the fuck": https://stackoverflow.com/a/47267312/13310905
+					response.json().then((data) => {
+						({status: response.status, body: data});
+					});
+				})
+				.then((data: any) => {
+					if (status === "400") {
+						// If status is 400, we know it was an error, so re-type it
+						const errData = data.error as ServerUserErrors.Response;
+						if (errData.type === "MISSING_REQUIRED_FIELD") {
+							alert("Missing required field: " + errData.errorConcerns);
+						}
+						else if (errData.type === "REQUIRED_FIELD_TOO_SHORT") {
+							alert(errData.errorConcerns + "is too short (must be 4 or longer)");
+						}
+						return;
+					}
+
+					// Here, stuff is presumably all good, so follow through with store actions
+				});
+
 			// state.messages = state.messages.filter((item) => item.id !== action.payload);
 		},
 	},
@@ -73,7 +108,7 @@ export const senderSlice = createSlice({
  * @param {RootState} state
  * @return {*}  {TypesZ.MessageSenderQueue}
  */
-export const selectMessages = (state: RootState): TypesZ.MessageSenderQueue => state.sender.messages;
+export const selectMessages = (state: RootState): Typez.MessageSenderQueue => state.sender.messages;
 
 
 
