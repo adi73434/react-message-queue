@@ -6,7 +6,10 @@
 	"scripts": {
 		"start": "nodemon",
 		"build": "tsc",
-		"doc": "typedoc"
+		"doc": "typedoc",
+		"asdf": "pm2 list",
+		"prod-commonjs": "pm2 start build/server/src/index.js",
+		"prod-esm": "echo \"I couldn't get this working\" || pm2 start build/server/src/index.js --node-args=\"--es-module-specifier-resolution=node\""
 	},
 	"author": "",
 	"license": "MIT",
@@ -14,6 +17,7 @@
 		"express": "^4.17.1",
 		"express-validator": "^6.12.1",
 		"mysql": "^2.18.1",
+		"pm2": "^5.1.1",
 		"typescript": "^4.4.3"
 	},
 	"devDependencies": {

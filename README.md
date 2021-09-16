@@ -88,3 +88,32 @@ I also set up React's dynamic routing within the `features/app.ts` file; however
 - `> npx eslint --init`, same as Client but withour React and targeting Node. I think I also had some issue and needed to manually install `typescript-eslint`
 - I copied my nodemon config from [here](https://github.com/adi73434/web-tutorials-and-snippets/blob/master/nodemon.json)
 - Specify type as module in package.json
+
+
+
+#### Production
+
+Prior to running the server, you must build it with `> npm run build`. I chose to do this instead of automatically recompiling every time you start the server.
+
+
+You can either install `pm2` globally and use the provided script files, or install it locally and use the npm scripts. It is not installed locally (as of time of writing) so you'd have to install it if you want to use the npm scripts.
+
+
+##### ESM:
+I tried using `--node-args="-r esm"`, as per [this post](https://stackoverflow.com/a/63815347/13310905), but that didn't work. I also tried replacing `-r esm` with `--es-module-specifier-resolution=node` but that didn't do it. I can't really be bothered figuring this out right now.
+
+
+- Set `module` in `tsconfig.json` to `ES2020`
+- Either:
+- - `> npm run prod-esm`
+- Or:
+- - `> ./scripts/prod-esm.sh`
+
+
+
+##### CommonJS:
+- Set `module` in `tsconfig.json` to `commonjs`
+- Either:
+- - `> npm run prod-commonjs`
+- Or:
+- - `> ./scripts/prod-commonjs.sh`
