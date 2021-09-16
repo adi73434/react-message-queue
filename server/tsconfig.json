@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		// https://github.com/adi73434/web-tutorials-and-snippets#support
-		"target": "ESNext",
-		"module": "ESNext",
+		"target": "es2021",
+		"module": "commonjs",
 		"moduleResolution": "Node",
 		"strict": true,
 		"allowJs": true,
@@ -26,7 +26,7 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"lib": [
-			"ESNext"
+			"es2021"
 		],
 		// "baseUrl": ".",
 		"outDir": "./build/",

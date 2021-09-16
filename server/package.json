@@ -8,7 +8,6 @@
 		"build": "tsc",
 		"doc": "typedoc"
 	},
-	"type": "module",
 	"author": "",
 	"license": "MIT",
 	"dependencies": {
